@@ -73,10 +73,7 @@ namespace ServiceInstallationCheckingPlugin
 
         public void eFormRetrived(object sender, EventArgs args)
         {
-            Case_Dto trigger = (Case_Dto)sender;
-
-            string caseId = trigger.MicrotingUId;
-            _bus.SendLocal(new eFormRetrieved(caseId));
+            // Do nothing
         }
 
         public void CaseCompleted(object sender, EventArgs args)
@@ -85,8 +82,7 @@ namespace ServiceInstallationCheckingPlugin
 
             if (trigger.CaseId != null)
             {
-                int caseId = (int)trigger.CaseId;
-                _bus.SendLocal(new eFormCompleted(caseId));
+                _bus.SendLocal(new eFormCompleted((int)trigger.CaseId, trigger.CheckListId));
             }
         }
 

@@ -1,11 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microting.eForm.Infrastructure.Constants;
-using Microting.eForm.Infrastructure.Models;
 using Microting.InstallationCheckingBase.Infrastructure.Data;
-using Microting.InstallationCheckingBase.Infrastructure.Data.Entities;
+using Microting.InstallationCheckingBase.Infrastructure.Enums;
 using Rebus.Handlers;
 using ServiceInstallationCheckingPlugin.Messages;
 
@@ -24,7 +21,27 @@ namespace ServiceInstallationCheckingPlugin.Handlers
         
         public async Task Handle(eFormCompleted message)
         {
-            // TODO
+            var installation = await _dbContext.Installations
+                .FirstOrDefaultAsync(x => 
+                    x.State == InstallationState.Assigned &&
+                    x.SdkCaseId == message.caseId
+                );
+
+            if (installation == null) return;
+
+            if (installation.Type == InstallationType.Installation)
+            {
+                installation.DateRemove = DateTime.UtcNow.AddDays(61);
+            } 
+            else
+            {
+                installation.State = InstallationState.Completed;
+                installation.DateActRemove = DateTime.UtcNow;
+
+                await _sdkCore.CaseDelete(message.checkListId, installation.EmployeeId.GetValueOrDefault());
+            }
+
+            await installation.Update(_dbContext);
         }
     }
 }
