@@ -80,9 +80,9 @@ namespace ServiceInstallationCheckingPlugin
         {
             Case_Dto trigger = (Case_Dto)sender;
 
-            if (trigger.CaseId != null)
+            if (trigger.CaseId != null && trigger.MicrotingUId != null)
             {
-                _bus.SendLocal(new eFormCompleted((int)trigger.CaseId, trigger.CheckListId));
+                _bus.SendLocal(new eFormCompleted((int)trigger.CaseId, (int)trigger.MicrotingUId));
             }
         }
 

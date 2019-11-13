@@ -13,6 +13,8 @@ namespace ServiceInstallationCheckingPlugin.Handlers
         private readonly eFormCore.Core _sdkCore;
         private readonly InstallationCheckingPnDbContext _dbContext;
 
+        private const int DAYS_BEFORE_REMOVE = 61;
+
         public EFormCompletedHandler(eFormCore.Core sdkCore, InstallationCheckingPnDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -31,14 +33,14 @@ namespace ServiceInstallationCheckingPlugin.Handlers
 
             if (installation.Type == InstallationType.Installation)
             {
-                installation.DateRemove = DateTime.UtcNow.AddDays(61);
+                installation.DateRemove = DateTime.UtcNow.AddDays(DAYS_BEFORE_REMOVE);
             } 
             else
             {
                 installation.State = InstallationState.Completed;
                 installation.DateActRemove = DateTime.UtcNow;
 
-                await _sdkCore.CaseDelete(message.checkListId, installation.EmployeeId.GetValueOrDefault());
+                await _sdkCore.CaseDelete(message.microtingUId);
             }
 
             await installation.Update(_dbContext);

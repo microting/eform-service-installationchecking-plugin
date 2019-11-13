@@ -17,16 +17,56 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+using Microsoft.EntityFrameworkCore;
+using Microting.InstallationCheckingBase.Infrastructure.Data;
+using Microting.InstallationCheckingBase.Infrastructure.Enums;
+using Microting.InstallationCheckingBase.Infrastructure.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
 {
-    using System.Threading.Tasks;
-
     public class Job
     {
-        public async Task Execute() 
+        private readonly eFormCore.Core _sdkCore;
+        private readonly InstallationCheckingPnDbContext _dbContext;
+
+        public Job(eFormCore.Core sdkCore, InstallationCheckingPnDbContext dbContext)
         {
-            //TODO
+            _dbContext = dbContext;
+            _sdkCore = sdkCore;
+        }
+
+        public async Task Execute()
+        {
+            // Get settings
+            var settings = await _dbContext.PluginConfigurationValues.ToListAsync();
+            var installationFormId = settings.First(x =>
+                x.Name == nameof(InstallationCheckingBaseSettings) + ":" + nameof(InstallationCheckingBaseSettings.InstallationFormId));
+            var removalFormId = settings.First(x =>
+                x.Name == nameof(InstallationCheckingBaseSettings) + ":" + nameof(InstallationCheckingBaseSettings.RemovalFormId));
+
+            // Get installations to be moved to removals page
+            var installations = await _dbContext.Installations
+                .Where(x =>
+                    x.DateRemove != null &&
+                    x.DateRemove < DateTime.UtcNow &&
+                    x.Type == InstallationType.Installation
+                ).ToListAsync();
+
+            foreach (var installation in installations)
+            {
+                var caseDto = await _sdkCore.CaseReadByCaseId(installation.SdkCaseId.GetValueOrDefault());
+
+                installation.Type = InstallationType.Removal;
+                installation.SdkCaseId = null;
+                await installation.Update(_dbContext);
+
+                if (caseDto == null) continue;
+
+                await _sdkCore.CaseDelete(caseDto.MicrotingUId.GetValueOrDefault());
+            }
         }
     }
 }
