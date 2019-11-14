@@ -18,6 +18,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 using Microsoft.EntityFrameworkCore;
+using Microting.eForm.Infrastructure.Models;
 using Microting.InstallationCheckingBase.Infrastructure.Data;
 using Microting.InstallationCheckingBase.Infrastructure.Enums;
 using Microting.InstallationCheckingBase.Infrastructure.Models;
@@ -44,8 +45,6 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
             var settings = await _dbContext.PluginConfigurationValues.ToListAsync();
             var installationFormId = settings.First(x =>
                 x.Name == nameof(InstallationCheckingBaseSettings) + ":" + nameof(InstallationCheckingBaseSettings.InstallationFormId));
-            var removalFormId = settings.First(x =>
-                x.Name == nameof(InstallationCheckingBaseSettings) + ":" + nameof(InstallationCheckingBaseSettings.RemovalFormId));
 
             // Get installations to be moved to removals page
             var installations = await _dbContext.Installations
@@ -59,13 +58,24 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
             {
                 var caseDto = await _sdkCore.CaseReadByCaseId(installation.SdkCaseId.GetValueOrDefault());
 
+                if (caseDto != null)
+                {
+                    await _sdkCore.CaseDelete(caseDto.MicrotingUId.GetValueOrDefault());
+                }
+
+                var removalMainElement = new MainElement();
+
+                // TODO create removal form
+
+                foreach (var meter in installation.Meters)
+                {
+                    // TODO create form elements by meters
+                }
+
+                installation.RemovalFormId = await _sdkCore.TemplateCreate(removalMainElement);
                 installation.Type = InstallationType.Removal;
                 installation.SdkCaseId = null;
                 await installation.Update(_dbContext);
-
-                if (caseDto == null) continue;
-
-                await _sdkCore.CaseDelete(caseDto.MicrotingUId.GetValueOrDefault());
             }
         }
     }

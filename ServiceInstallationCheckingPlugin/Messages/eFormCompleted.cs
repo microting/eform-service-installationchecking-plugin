@@ -2,13 +2,13 @@ namespace ServiceInstallationCheckingPlugin.Messages
 {
     public class eFormCompleted
     {
-        public int caseId { get; protected set; }
         public int microtingUId { get; protected set; }
+        public int checkUId { get; protected set; }
 
-        public eFormCompleted(int caseId, int microtingUId)
+        public eFormCompleted(int microtingUId, int checkUId)
         {
-            this.caseId = caseId;
             this.microtingUId = microtingUId;
+            this.checkUId = checkUId;
         }
     }
 }

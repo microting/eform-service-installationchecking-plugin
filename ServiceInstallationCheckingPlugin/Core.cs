@@ -33,6 +33,7 @@ using ServiceInstallationCheckingPlugin.Installers;
 using Microting.InstallationCheckingBase.Infrastructure.Data.Factories;
 using ServiceInstallationCheckingPlugin.Messages;
 using ServiceInstallationCheckingPlugin.Scheduler.Jobs;
+using System.Diagnostics;
 
 namespace ServiceInstallationCheckingPlugin
 {
@@ -78,11 +79,9 @@ namespace ServiceInstallationCheckingPlugin
 
         public void CaseCompleted(object sender, EventArgs args)
         {
-            Case_Dto trigger = (Case_Dto)sender;
-
-            if (trigger.CaseId != null && trigger.MicrotingUId != null)
+            if (sender is Case_Dto trigger && trigger.MicrotingUId != null && trigger.CheckUId != null)
             {
-                _bus.SendLocal(new eFormCompleted((int)trigger.CaseId, (int)trigger.MicrotingUId));
+                _bus.SendLocal(new eFormCompleted((int)trigger.MicrotingUId, (int)trigger.CheckUId));
             }
         }
 
@@ -216,7 +215,7 @@ namespace ServiceInstallationCheckingPlugin
             _scheduleTimer = new Timer(async x =>
             {
                 await job.Execute();
-            }, null, TimeSpan.Zero, TimeSpan.FromMinutes(15));
+            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(15));
         }
     }
 }
