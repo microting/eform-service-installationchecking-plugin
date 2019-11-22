@@ -40,47 +40,48 @@ namespace ServiceInstallationCheckingPlugin.Handlers
             if (installation.Type == InstallationType.Installation)
             {
                 var replyElement = await _sdkCore.CaseRead(message.microtingUId, message.checkUId);
-                var checkListValue = (CheckListValue)replyElement.ElementList[0];
-                var fields = checkListValue.DataItemList;
+                var checkListValue = (CheckListValue) replyElement.ElementList[0];
+                var fields = checkListValue.DataItemList.Select(di => di as Field).ToList();
 
-                // TODO Fill installation information from fields
+                installation.CadastralNumber = fields[0].FieldValue;
+                installation.PropertyNumber = fields[1].FieldValue;
+                installation.ApartmentNumber = fields[2].FieldValue;
+                installation.CadastralType = fields[3].FieldValue;
+                installation.YearBuilt = int.Parse(fields[4].FieldValue);
+                installation.LivingFloorsNumber = int.Parse(fields[5].FieldValue);
 
-                foreach (Field field in fields)
+                foreach (var field in fields.Skip(8))
                 {
-                    var rgx = new Regex(@"Måler (?<Num>\d*) - (?<Name>.*)");
+                    var rgx = new Regex(@"MÃ¥ler (?<Num>\d*) - (?<Name>.*)");
                     var match = rgx.Match(field.Label);
 
-                    if (match.Success)
+                    if (!match.Success) break;
+
+                    var num = int.Parse(match.Groups["Num"].Value);
+                    var name = match.Groups["Name"].Value;
+                    
+                    var meter = installation.Meters.FirstOrDefault(m => m.Num == num) 
+                                ?? new Meter() { Num = num };
+
+                    switch (name)
                     {
-                        var num = int.Parse(match.Groups["Num"].Value);
-                        var name = match.Groups["Name"].Value;
-                        var meter = installation.Meters.FirstOrDefault(m => m.Num == num);
+                        case "QR":
+                            meter.QR = field.FieldValues[0].Value;
+                            break;
+                        case "Rumtype":
+                            meter.RoomType = field.FieldValues[0].ValueReadable;
+                            break;
+                        case "Etage":
+                            meter.Floor = int.Parse(field.FieldValues[0].Value);
+                            break;
+                        case "Rumnavn":
+                            meter.RoomName = field.FieldValues[0].Value;
+                            break;
+                    }
 
-                        if (meter == null)
-                        {
-                            meter = new Meter() { Num = num };
-                        }
-
-                        switch (name)
-                        {
-                            case "QR":
-                                meter.QR = field.FieldValues[0].Value;
-                                break;
-                            case "Rumtype":
-                                meter.RoomType = field.FieldValues[0].ValueReadable;
-                                break;
-                            case "Etage":
-                                meter.Floor = int.Parse(field.FieldValues[0].Value);
-                                break;
-                            case "Rumnavn":
-                                meter.RoomName = field.FieldValues[0].Value;
-                                break;
-                        }
-
-                        if (!installation.Meters.Any(m => m.Num == num))
-                        {
-                            installation.Meters.Add(meter);
-                        }
+                    if (installation.Meters.All(m => m.Num != num))
+                    {
+                        installation.Meters.Add(meter);
                     }
                 }
 

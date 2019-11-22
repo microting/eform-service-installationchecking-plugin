@@ -33,7 +33,6 @@ using ServiceInstallationCheckingPlugin.Installers;
 using Microting.InstallationCheckingBase.Infrastructure.Data.Factories;
 using ServiceInstallationCheckingPlugin.Messages;
 using ServiceInstallationCheckingPlugin.Scheduler.Jobs;
-using System.Diagnostics;
 
 namespace ServiceInstallationCheckingPlugin
 {
