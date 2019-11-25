@@ -10,6 +10,7 @@ using Microting.InstallationCheckingBase.Infrastructure.Data.Entities;
 using Microting.InstallationCheckingBase.Infrastructure.Enums;
 using Rebus.Handlers;
 using ServiceInstallationCheckingPlugin.Messages;
+using OpenStack.NetCoreSwiftClient.Extensions;
 
 namespace ServiceInstallationCheckingPlugin.Handlers
 {
@@ -18,7 +19,7 @@ namespace ServiceInstallationCheckingPlugin.Handlers
         private readonly eFormCore.Core _sdkCore;
         private readonly InstallationCheckingPnDbContext _dbContext;
 
-        private const int DAYS_BEFORE_REMOVE = 61;
+        private const int DaysBeforeRemove = 61;
 
         public EFormCompletedHandler(eFormCore.Core sdkCore, InstallationCheckingPnDbContext dbContext)
         {
@@ -43,24 +44,24 @@ namespace ServiceInstallationCheckingPlugin.Handlers
                 var checkListValue = (CheckListValue) replyElement.ElementList[0];
                 var fields = checkListValue.DataItemList.Select(di => di as Field).ToList();
 
-                installation.CadastralNumber = fields[0].FieldValue;
-                installation.PropertyNumber = fields[1].FieldValue;
-                installation.ApartmentNumber = fields[2].FieldValue;
-                installation.CadastralType = fields[3].FieldValue;
-                installation.YearBuilt = int.Parse(fields[4].FieldValue);
-                installation.LivingFloorsNumber = int.Parse(fields[5].FieldValue);
+                installation.CadastralNumber = fields[0].FieldValues[0].Value;
+                installation.PropertyNumber = fields[1].FieldValues[0].Value;
+                installation.ApartmentNumber = fields[2].FieldValues[0].Value;
+                installation.CadastralType = fields[3].FieldValues[0].ValueReadable;
+                installation.YearBuilt = int.Parse(fields[4].FieldValues[0].Value);
+                installation.LivingFloorsNumber = int.Parse(fields[5].FieldValues[0].Value);
 
                 foreach (var field in fields.Skip(8))
                 {
                     var rgx = new Regex(@"Måler (?<Num>\d*) - (?<Name>.*)");
                     var match = rgx.Match(field.Label);
 
-                    if (!match.Success) break;
+                    if (!match.Success || field.FieldValues[0].Value.IsNullOrEmpty()) continue;
 
                     var num = int.Parse(match.Groups["Num"].Value);
                     var name = match.Groups["Name"].Value;
                     
-                    var meter = installation.Meters.FirstOrDefault(m => m.Num == num) 
+                    var meter = installation.Meters.FirstOrDefault(m => m.Num == num)
                                 ?? new Meter() { Num = num };
 
                     switch (name)
@@ -85,7 +86,7 @@ namespace ServiceInstallationCheckingPlugin.Handlers
                     }
                 }
 
-                installation.DateRemove = DateTime.UtcNow.AddDays(DAYS_BEFORE_REMOVE);
+                installation.DateRemove = DateTime.UtcNow.AddDays(DaysBeforeRemove);
             } 
             else
             {
