@@ -17,6 +17,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 using Microsoft.EntityFrameworkCore;
 using Microting.eForm.Infrastructure.Models;
 using Microting.InstallationCheckingBase.Infrastructure.Data;
@@ -24,14 +25,11 @@ using Microting.InstallationCheckingBase.Infrastructure.Enums;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.IO;
-using System.Reflection;
-using System.Text;
+using System.Collections.Generic;
+using Microting.eForm.Infrastructure.Constants;
 
 namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
 {
-    using Microting.eForm.Infrastructure.Constants;
-
     public class Job
     {
         private readonly eFormCore.Core _sdkCore;
@@ -61,23 +59,22 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
                 {
                     await _sdkCore.CaseDelete(caseDto.MicrotingUId.GetValueOrDefault());
                 }
-                
-                MainElement removalForm;
 
-                var assembly = Assembly.GetExecutingAssembly();
-                var assemblyName = assembly.GetName().Name;
-                
-                using (var formStream = assembly.GetManifestResourceStream($"{assemblyName}.Resources.removal_form.xml"))
-                using (var reader = new StreamReader(formStream, Encoding.UTF8))
+                var removalForm = new MainElement
                 {
-                    var formString = await reader.ReadToEndAsync();
-                    removalForm = await _sdkCore.TemplateFromXml(formString);
-                }
-                
-                var dataElement = (DataElement) removalForm.ElementList[0];
-                
+                    Id = 141709,
+                    Repeated = 0,
+                    Label = "(2) Radonmålinger Nedtagning",
+                    StartDate = new DateTime(2019, 11, 4),
+                    EndDate = new DateTime(2029, 11, 4),
+                    Language = "da",
+                    MultiApproval = false,
+                    FastNavigation = false,
+                    DisplayOrder = 0,
+                };
+
                 var entityGroup = await _sdkCore.EntityGroupCreate(
-                    Constants.FieldTypes.EntitySearch, 
+                    Constants.FieldTypes.EntitySearch,
                     "Removal devices " + installation.Id
                 );
 
@@ -85,20 +82,60 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
                 foreach (var meter in installation.Meters)
                 {
                     await _sdkCore.EntitySearchItemCreate(
-                        entityGroup.Id, 
-                        meter.QR, 
-                        "", 
+                        entityGroup.Id,
+                        meter.QR,
+                        "",
                         nextItemUid++.ToString()
                     );
-                    
+
                     var label = $"Måler {nextItemUid} - QR";
                     var sourceId = entityGroup.Id;
-                    
-                    // TODO Find out how to create DataItem
+
+                    var dataItems = new List<DataItem>();
+                    var showPdf = new ShowPdf(
+                        1,
+                        true,
+                        false,
+                        "Vis PDF med kort over placering af målere",
+                        "Det kan være en fordel at udskrive oversigten, før nedtagningsadresser besøges.",
+                        "e8eaf6",
+                        0,
+                        false,
+                        "https://eform.microting.com/app_files/uploads/20191008131612_14874_acb5333050e476e81c83bbcf5acd442c.pdf");
+
+                    var saveButton = new SaveButton(
+                        2,
+                        true,
+                        false,
+                        "Tryk GEM DATA, når alle målere er QR-scannet",
+                        "",
+                        "f0f8db",
+                        999,
+                        false,
+                        "GEM DATA");
+
+                    dataItems.Add(showPdf);
+                    dataItems.Add(saveButton);
+
+
+                    var dataElement = new DataElement(
+                        nextItemUid,
+                        label,
+                        0,
+                        @"CompanyAddress<br>CompanyAddress2<br>ZipCode<br>CityName<br>Country<br><b>Nedtagningsdato: 2020-02-23</b>",
+                        false,
+                        false,
+                        true,
+                        false,
+                        "",
+                        false,
+                        new List<DataItemGroup>(),
+                        dataItems);
+
+                    removalForm.ElementList.Add(dataElement);
                 }
 
                 removalForm = await _sdkCore.TemplateUploadData(removalForm);
-                
                 installation.RemovalFormId = await _sdkCore.TemplateCreate(removalForm);
                 installation.Type = InstallationType.Removal;
                 installation.SdkCaseId = null;
