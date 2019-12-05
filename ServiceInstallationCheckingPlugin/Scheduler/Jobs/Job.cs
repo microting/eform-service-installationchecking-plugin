@@ -88,9 +88,6 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
                         nextItemUid++.ToString()
                     );
 
-                    var label = $"Måler {nextItemUid} - QR";
-                    var sourceId = entityGroup.Id;
-
                     var dataItems = new List<DataItem>();
                     var showPdf = new ShowPdf(
                         1,
@@ -117,12 +114,15 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
                     dataItems.Add(showPdf);
                     dataItems.Add(saveButton);
 
+                    var removalDate = DateTime.Now.ToString("yyyy-MM-dd");
+                    var descriptionString = $"{installation.CompanyAddress}<br>{installation.CompanyAddress2}<br>{installation.ZipCode}<br>{installation.CityName}<br>{installation.CountryCode}<br><b>Nedtagningsdato: {removalDate}</b>";
+                    var label = $"Måler {nextItemUid} - QR";
 
                     var dataElement = new DataElement(
                         nextItemUid,
                         label,
                         0,
-                        @"CompanyAddress<br>CompanyAddress2<br>ZipCode<br>CityName<br>Country<br><b>Nedtagningsdato: 2020-02-23</b>",
+                        descriptionString,
                         false,
                         false,
                         true,
