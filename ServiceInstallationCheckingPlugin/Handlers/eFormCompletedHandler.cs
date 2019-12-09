@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -29,7 +28,6 @@ namespace ServiceInstallationCheckingPlugin.Handlers
         
         public async Task Handle(eFormCompleted message)
         {
-            Debugger.Break();
             var installation = await _dbContext.Installations
                 .FirstOrDefaultAsync(x => 
                     x.State == InstallationState.Assigned &&
@@ -86,6 +84,7 @@ namespace ServiceInstallationCheckingPlugin.Handlers
                     }
                 }
 
+                installation.DateInstall = DateTime.UtcNow;
                 installation.DateRemove = DateTime.UtcNow.AddDays(DaysBeforeRemove);
             } 
             else
