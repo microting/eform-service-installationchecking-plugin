@@ -113,8 +113,8 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
                 installation.RemovalFormId = int.Parse(removalFormId.Value);
                 installation.Type = InstallationType.Removal;
                 installation.State = InstallationState.NotAssigned;
-                installation.EmployeeId = null;
                 installation.SdkCaseId = await _sdkCore.CaseCreate(removalForm, "", installation.EmployeeId.GetValueOrDefault());
+                installation.EmployeeId = null;
                 
                 await installation.Update(_dbContext);
             }
