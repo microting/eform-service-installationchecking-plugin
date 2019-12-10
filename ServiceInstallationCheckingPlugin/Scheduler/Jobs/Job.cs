@@ -17,6 +17,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
 using Microsoft.EntityFrameworkCore;
 using Microting.eForm.Infrastructure.Models;
 using Microting.InstallationCheckingBase.Infrastructure.Data;
@@ -24,14 +25,11 @@ using Microting.InstallationCheckingBase.Infrastructure.Enums;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.IO;
-using System.Reflection;
-using System.Text;
+using Microting.eForm.Infrastructure.Constants;
+using Microting.InstallationCheckingBase.Infrastructure.Models;
 
 namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
 {
-    using Microting.eForm.Infrastructure.Constants;
-
     public class Job
     {
         private readonly eFormCore.Core _sdkCore;
@@ -45,6 +43,15 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
 
         public async Task Execute()
         {
+            // Get settings
+            var settings = await _dbContext.PluginConfigurationValues.ToListAsync();
+            var removalFormId = settings.FirstOrDefault(x =>
+                x.Name == nameof(InstallationCheckingBaseSettings) + ":" + nameof(InstallationCheckingBaseSettings.RemovalFormId));
+            if (removalFormId == null)
+            {
+                throw new Exception($"{nameof(InstallationCheckingBaseSettings.RemovalFormId)} not found in settings");
+            }
+            
             // Get installations to be moved to removals page
             var installations = await _dbContext.Installations
                 .Where(x =>
@@ -61,47 +68,54 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
                 {
                     await _sdkCore.CaseDelete(caseDto.MicrotingUId.GetValueOrDefault());
                 }
-                
-                MainElement removalForm;
 
-                var assembly = Assembly.GetExecutingAssembly();
-                var assemblyName = assembly.GetName().Name;
-                
-                using (var formStream = assembly.GetManifestResourceStream($"{assemblyName}.Resources.removal_form.xml"))
-                using (var reader = new StreamReader(formStream, Encoding.UTF8))
-                {
-                    var formString = await reader.ReadToEndAsync();
-                    removalForm = await _sdkCore.TemplateFromXml(formString);
-                }
-                
+                var removalForm = await _sdkCore.TemplateRead(int.Parse(removalFormId.Value));
+
                 var dataElement = (DataElement) removalForm.ElementList[0];
-                
+                var removalDate = DateTime.Now.ToString("yyyy-MM-dd");
+                dataElement.Description.InderValue = 
+                    $"{installation.CompanyAddress}<br>{installation.CompanyAddress2}<br>{installation.ZipCode}<br>{installation.CityName}<br>{installation.CountryCode}<br><b>Nedtagningsdato: {removalDate}</b>";
+
                 var entityGroup = await _sdkCore.EntityGroupCreate(
-                    Constants.FieldTypes.EntitySearch, 
+                    Constants.FieldTypes.EntitySearch,
                     "Removal devices " + installation.Id
                 );
 
-                var nextItemUid = 0;
+                var i = 0;
                 foreach (var meter in installation.Meters)
                 {
                     await _sdkCore.EntitySearchItemCreate(
-                        entityGroup.Id, 
-                        meter.QR, 
-                        "", 
-                        nextItemUid++.ToString()
+                        entityGroup.Id,
+                        meter.QR,
+                        "",
+                        i++.ToString()
                     );
-                    
-                    var label = $"Måler {nextItemUid} - QR";
-                    var sourceId = entityGroup.Id;
-                    
-                    // TODO Find out how to create DataItem
+
+                    dataElement.DataItemList.Add(new EntitySearch(
+                        3 + i,
+                        false,
+                        false,
+                        $"Måler {i} - QR",
+                        "",
+                        "e8eaf6",
+                        i,
+                        false,
+                        0,
+                        entityGroup.Id,
+                        false,
+                        "",
+                        3,
+                        false,
+                        "")
+                    );
                 }
 
-                removalForm = await _sdkCore.TemplateUploadData(removalForm);
-                
-                installation.RemovalFormId = await _sdkCore.TemplateCreate(removalForm);
+                installation.RemovalFormId = int.Parse(removalFormId.Value);
                 installation.Type = InstallationType.Removal;
-                installation.SdkCaseId = null;
+                installation.State = InstallationState.NotAssigned;
+                installation.EmployeeId = null;
+                installation.SdkCaseId = await _sdkCore.CaseCreate(removalForm, "", installation.EmployeeId.GetValueOrDefault());
+                
                 await installation.Update(_dbContext);
             }
         }

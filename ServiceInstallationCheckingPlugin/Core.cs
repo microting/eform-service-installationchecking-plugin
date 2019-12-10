@@ -78,7 +78,7 @@ namespace ServiceInstallationCheckingPlugin
 
         public void CaseCompleted(object sender, EventArgs args)
         {
-            if (sender is Case_Dto trigger && trigger.MicrotingUId != null && trigger.CheckUId != null)
+            if (sender is CaseDto trigger && trigger.MicrotingUId != null && trigger.CheckUId != null)
             {
                 _bus.SendLocal(new eFormCompleted((int)trigger.MicrotingUId, (int)trigger.CheckUId));
             }
