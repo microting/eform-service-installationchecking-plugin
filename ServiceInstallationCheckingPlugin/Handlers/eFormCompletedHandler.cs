@@ -73,6 +73,22 @@ namespace ServiceInstallationCheckingPlugin.Handlers
                         installation.LivingFloorsNumber = int.Parse(fields[5].FieldValues[0].Value);
                     }
 
+                    // This should be higher than 0 since the field is mandatory.
+                    if (fields[6].FieldValues.Count > 0)
+                    {
+                        foreach (FieldValue fieldValue in fields[6].FieldValues)
+                        {
+                            if (installation.InstallationImageName == "")
+                            {
+                                installation.InstallationImageName = fieldValue.UploadedDataObj.FileName;
+                            }
+                            else
+                            {
+                                installation.InstallationImageName += $",{fieldValue.UploadedDataObj.FileName}";
+                            }
+                        }
+                    }
+
                     foreach (var field in fields.Skip(8))
                     {
                         var rgx = new Regex(@"Måler (?<Num>\d*) - (?<Name>.*)");
