@@ -78,8 +78,20 @@ namespace ServiceInstallationCheckingPlugin
 
         public void CaseCompleted(object sender, EventArgs args)
         {
-            if (sender is CaseDto trigger && trigger.MicrotingUId != null && trigger.CheckUId != null)
+            //if (sender is CaseDto trigger && trigger.MicrotingUId != null && trigger.CheckUId != null)
+            //{
+            //    _bus.SendLocal(new eFormCompleted((int)trigger.MicrotingUId, (int)trigger.CheckUId));
+            //}
+            Console.WriteLine("[INF] ServiceInstallationCheckingPlugin.CaseCompleted: called");
+
+            CaseDto trigger = (CaseDto)sender;
+
+            int? caseId = trigger.MicrotingUId;
+            if (caseId != null)
             {
+                Console.WriteLine("[INF] ServiceInstallationCheckingPlugin.CaseCompleted: caseId != null");
+                Console.WriteLine($"[INF] ServiceInstallationCheckingPlugin.CaseCompleted: trigger.MicrotingUId is {trigger.MicrotingUId}");
+                Console.WriteLine($"[INF] ServiceInstallationCheckingPlugin.CaseCompleted: trigger.CheckUId is {trigger.CheckUId}");
                 _bus.SendLocal(new eFormCompleted((int)trigger.MicrotingUId, (int)trigger.CheckUId));
             }
         }

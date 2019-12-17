@@ -28,6 +28,7 @@ namespace ServiceInstallationCheckingPlugin.Handlers
 
         public async Task Handle(eFormCompleted message)
         {
+            Console.WriteLine("[INF] EFormCompletedHandler.Handle: called");
             var installation = await _dbContext.Installations
                 .FirstOrDefaultAsync(x =>
                     x.State == InstallationState.Assigned &&
@@ -36,8 +37,10 @@ namespace ServiceInstallationCheckingPlugin.Handlers
 
             if (installation == null) return;
 
+            Console.WriteLine("[INF] EFormCompletedHandler.Handle: installation != null");
             if (installation.Type == InstallationType.Installation)
             {
+                Console.WriteLine("[INF] EFormCompletedHandler.Handle: installation.Type == InstallationType.Installation");
                 var replyElement = await _sdkCore.CaseRead(message.microtingUId, message.checkUId);
                 var checkListValue = (CheckListValue) replyElement.ElementList[0];
                 var fields = checkListValue.DataItemList.Select(di => di as Field).ToList();
