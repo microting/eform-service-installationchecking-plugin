@@ -21,4 +21,4 @@ su ubuntu -c \
 "mkdir -p /var/www/microting/eform-debian-service/MicrotingService/MicrotingService/out/Plugins/"
 
 su ubuntu -c \
-"cp -av /var/www/microting/eform-service-installationchecking-plugin/ServiceInstallationCheckingPlugin/out /var/www/microting/eform-debian-service/MicrotingService/MicrotingService/out/Plugins/ServiceInstallationCheckingPlugin"
+"cp -av /var/www/microting/eform-service-installationchecking-plugin/ServiceInstallationCheckingPlugin/out /var/www/microting/eform-debian-service/MicrotingService/out/Plugins/ServiceInstallationCheckingPlugin"
