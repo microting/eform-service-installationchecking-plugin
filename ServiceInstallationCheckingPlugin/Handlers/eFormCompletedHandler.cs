@@ -130,16 +130,23 @@ namespace ServiceInstallationCheckingPlugin.Handlers
 
                 installation.DateInstall = DateTime.UtcNow;
                 installation.DateRemove = DateTime.UtcNow.AddDays(DaysBeforeRemove);
+                
+                await _sdkCore.CaseDelete(message.microtingUId);
+
+                installation.Type = InstallationType.Removal;
+                installation.State = InstallationState.NotAssigned;
+                await installation.Update(_dbContext);
             }
             else
             {
                 installation.DateActRemove = DateTime.UtcNow;
+                
+                await _sdkCore.CaseDelete(message.microtingUId);
+
+                installation.State = InstallationState.Completed;
+                await installation.Update(_dbContext);
             }
 
-            await _sdkCore.CaseDelete(message.microtingUId);
-
-            installation.State = InstallationState.Completed;
-            await installation.Update(_dbContext);
         }
     }
 }
