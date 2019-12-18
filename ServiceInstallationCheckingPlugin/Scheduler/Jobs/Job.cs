@@ -50,8 +50,8 @@ namespace ServiceInstallationCheckingPlugin.Scheduler.Jobs
             {
                 installation.Type = InstallationType.Removal;
                 installation.State = InstallationState.NotAssigned;
-                installation.SdkCaseId = null;
-                installation.EmployeeId = null;
+//                installation.SdkCaseId = null;
+//                installation.EmployeeId = null;
                 
                 await installation.Update(_dbContext);
             }

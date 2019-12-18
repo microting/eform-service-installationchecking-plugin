@@ -32,7 +32,7 @@ namespace ServiceInstallationCheckingPlugin.Handlers
             var installation = await _dbContext.Installations
                 .FirstOrDefaultAsync(x =>
                     x.State == InstallationState.Assigned &&
-                    x.SdkCaseId == message.microtingUId
+                    x.InstallationSdkCaseId == message.microtingUId
                 );
 
             if (installation == null) return;
