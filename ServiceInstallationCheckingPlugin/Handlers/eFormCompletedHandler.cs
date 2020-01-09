@@ -87,13 +87,24 @@ namespace ServiceInstallationCheckingPlugin.Handlers
                             }
                             else
                             {
-                                installation.InstallationImageName += $",{fieldValue.UploadedDataObj.FileName}";
+                                try
+                                {
+                                    installation.InstallationImageName += $",{fieldValue.UploadedDataObj.FileName}";
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"[ERR] EFormCompletedHandler.Handle: InstallationImageName += gave error {ex.Message}");
+                                }
+                                
                             }
                         }
                     }
 
+                    Console.WriteLine("[INF] EFormCompletedHandler.Handle: start looping fields");
                     foreach (var field in fields.Skip(8))
                     {
+                        
+                        Console.WriteLine($"[INF] EFormCompletedHandler.Handle: parsing field {field.Label}");
                         var rgx = new Regex(@"Måler (?<Num>\d*) - (?<Name>.*)");
                         var match = rgx.Match(field.Label);
 
@@ -127,6 +138,7 @@ namespace ServiceInstallationCheckingPlugin.Handlers
                         }
                     }
                 }
+                Console.WriteLine("[INF] EFormCompletedHandler.Handle: done looping fields");
 
                 installation.DateInstall = DateTime.UtcNow;
                 installation.DateRemove = DateTime.UtcNow.AddDays(DaysBeforeRemove);
