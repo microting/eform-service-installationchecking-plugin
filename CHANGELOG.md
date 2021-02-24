@@ -1,8 +1,26 @@
 # Changelog
 
+## [Unreleased](https://github.com/microting/eform-service-installationchecking-plugin/tree/HEAD)
+
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.131...HEAD)
+
+**Merged pull requests:**
+
+- Bump NUnit from 3.12.0 to 3.13.1 [\#27](https://github.com/microting/eform-service-installationchecking-plugin/pull/27) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.7.1 to 16.8.3 [\#11](https://github.com/microting/eform-service-installationchecking-plugin/pull/11) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+## [v1.0.131](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.131) (2021-02-24)
+
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.130...v1.0.131)
+
 ## [v1.0.130](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.130) (2021-02-23)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.129...v1.0.130)
+
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 2.0.90 to 2.0.92 [\#37](https://github.com/microting/eform-service-installationchecking-plugin/issues/37)
+- Bump Microting.eForm from 4.3.17 to 4.4.1 [\#36](https://github.com/microting/eform-service-installationchecking-plugin/issues/36)
 
 ## [v1.0.129](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.129) (2021-02-18)
 
