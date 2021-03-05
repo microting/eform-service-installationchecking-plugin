@@ -1,8 +1,32 @@
 # Changelog
 
+## [v1.0.132](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.132) (2021-03-05)
+
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.131...v1.0.132)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormApi.BasePn from 2.0.97 to 2.0.99 [\#44](https://github.com/microting/eform-service-installationchecking-plugin/issues/44)
+- Bump Microting.eForm from 4.4.1 to 4.4.3 [\#43](https://github.com/microting/eform-service-installationchecking-plugin/issues/43)
+
+**Merged pull requests:**
+
+- Bump Microsoft.NET.Test.Sdk from 16.8.3 to 16.9.1 [\#38](https://github.com/microting/eform-service-installationchecking-plugin/pull/38) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump NUnit from 3.12.0 to 3.13.1 [\#27](https://github.com/microting/eform-service-installationchecking-plugin/pull/27) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.7.1 to 16.8.3 [\#11](https://github.com/microting/eform-service-installationchecking-plugin/pull/11) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+## [v1.0.131](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.131) (2021-02-24)
+
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.130...v1.0.131)
+
 ## [v1.0.130](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.130) (2021-02-23)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.129...v1.0.130)
+
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 2.0.90 to 2.0.92 [\#37](https://github.com/microting/eform-service-installationchecking-plugin/issues/37)
+- Bump Microting.eForm from 4.3.17 to 4.4.1 [\#36](https://github.com/microting/eform-service-installationchecking-plugin/issues/36)
 
 ## [v1.0.129](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.129) (2021-02-18)
 
