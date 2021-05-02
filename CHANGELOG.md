@@ -1,11 +1,17 @@
 # Changelog
 
-## [Unreleased](https://github.com/microting/eform-service-installationchecking-plugin/tree/HEAD)
+## [v1.0.132](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.132) (2021-03-05)
 
-[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.131...HEAD)
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.131...v1.0.132)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormApi.BasePn from 2.0.97 to 2.0.99 [\#44](https://github.com/microting/eform-service-installationchecking-plugin/issues/44)
+- Bump Microting.eForm from 4.4.1 to 4.4.3 [\#43](https://github.com/microting/eform-service-installationchecking-plugin/issues/43)
 
 **Merged pull requests:**
 
+- Bump Microsoft.NET.Test.Sdk from 16.8.3 to 16.9.1 [\#38](https://github.com/microting/eform-service-installationchecking-plugin/pull/38) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump NUnit from 3.12.0 to 3.13.1 [\#27](https://github.com/microting/eform-service-installationchecking-plugin/pull/27) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Bump Microsoft.NET.Test.Sdk from 16.7.1 to 16.8.3 [\#11](https://github.com/microting/eform-service-installationchecking-plugin/pull/11) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
