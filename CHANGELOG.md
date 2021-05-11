@@ -1,8 +1,24 @@
 # Changelog
 
+## [v1.0.134](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.134) (2021-05-11)
+
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.133...v1.0.134)
+
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 3.0.7 to 3.0.8 [\#130](https://github.com/microting/eform-service-installationchecking-plugin/issues/130)
+- Bump Microting.eFormApi.BasePn from 3.0.8 to 3.0.9 [\#129](https://github.com/microting/eform-service-installationchecking-plugin/issues/129)
+- Bump Microting.eForm from 5.1.4 to 5.1.5 [\#128](https://github.com/microting/eform-service-installationchecking-plugin/issues/128)
+
 ## [v1.0.133](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.133) (2021-05-07)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.132...v1.0.133)
+
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 2.0.92 to 3.0.7 [\#126](https://github.com/microting/eform-service-installationchecking-plugin/issues/126)
+- Bump Microting.eFormApi.BasePn from 2.0.99 to 3.0.8 [\#125](https://github.com/microting/eform-service-installationchecking-plugin/issues/125)
+- Bump Microting.eForm from 4.4.3 to 5.1.4 [\#124](https://github.com/microting/eform-service-installationchecking-plugin/issues/124)
 
 ## [v1.0.132](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.132) (2021-03-05)
 
@@ -22,6 +38,11 @@
 ## [v1.0.131](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.131) (2021-02-24)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.130...v1.0.131)
+
+**Implemented enhancements:**
+
+- Bump Microting.eFormApi.BasePn from 2.0.97 to 2.0.98 [\#40](https://github.com/microting/eform-service-installationchecking-plugin/issues/40)
+- Bump Microting.eForm from 4.4.1 to 4.4.2 [\#39](https://github.com/microting/eform-service-installationchecking-plugin/issues/39)
 
 ## [v1.0.130](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.130) (2021-02-23)
 
