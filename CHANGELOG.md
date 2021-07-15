@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.147](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.147) (2021-07-15)
+
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.146...v1.0.147)
+
 ## [v1.0.146](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.146) (2021-07-08)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.145...v1.0.146)
