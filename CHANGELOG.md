@@ -1,28 +1,75 @@
 # Changelog
 
+## [Unreleased](https://github.com/microting/eform-service-installationchecking-plugin/tree/HEAD)
+
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.157...HEAD)
+
+**Merged pull requests:**
+
+- Bump Microsoft.NET.Test.Sdk from 16.10.0 to 16.11.0 [\#221](https://github.com/microting/eform-service-installationchecking-plugin/pull/221) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.0.157](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.157) (2021-09-16)
+
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.156...v1.0.157)
+
 ## [v1.0.156](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.156) (2021-09-14)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.155...v1.0.156)
+
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 3.0.36 to 3.0.37 [\#243](https://github.com/microting/eform-service-installationchecking-plugin/issues/243)
+- Bump Microting.eFormApi.BasePn from 3.0.46 to 3.0.47 [\#242](https://github.com/microting/eform-service-installationchecking-plugin/issues/242)
+- Bump Microting.eForm from 5.2.36 to 5.2.37 [\#241](https://github.com/microting/eform-service-installationchecking-plugin/issues/241)
 
 ## [v1.0.155](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.155) (2021-09-14)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.154...v1.0.155)
 
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 3.0.35 to 3.0.36 [\#240](https://github.com/microting/eform-service-installationchecking-plugin/issues/240)
+- Bump Microting.eFormApi.BasePn from 3.0.45 to 3.0.46 [\#239](https://github.com/microting/eform-service-installationchecking-plugin/issues/239)
+- Bump Microting.eForm from 5.2.35 to 5.2.36 [\#238](https://github.com/microting/eform-service-installationchecking-plugin/issues/238)
+
 ## [v1.0.154](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.154) (2021-09-06)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.153...v1.0.154)
+
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 3.0.34 to 3.0.35 [\#234](https://github.com/microting/eform-service-installationchecking-plugin/issues/234)
+- Bump Microting.eFormApi.BasePn from 3.0.44 to 3.0.45 [\#233](https://github.com/microting/eform-service-installationchecking-plugin/issues/233)
+- Bump Microting.eForm from 5.2.33 to 5.2.35 [\#232](https://github.com/microting/eform-service-installationchecking-plugin/issues/232)
 
 ## [v1.0.153](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.153) (2021-09-03)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.152...v1.0.153)
 
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 3.0.33 to 3.0.34 [\#229](https://github.com/microting/eform-service-installationchecking-plugin/issues/229)
+- Bump Microting.eFormApi.BasePn from 3.0.43 to 3.0.44 [\#228](https://github.com/microting/eform-service-installationchecking-plugin/issues/228)
+
 ## [v1.0.152](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.152) (2021-08-18)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.151...v1.0.152)
 
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 3.0.32 to 3.0.33 [\#227](https://github.com/microting/eform-service-installationchecking-plugin/issues/227)
+- Bump Microting.eFormApi.BasePn from 3.0.42 to 3.0.43 [\#226](https://github.com/microting/eform-service-installationchecking-plugin/issues/226)
+- Bump Microting.eForm from 5.2.32 to 5.2.33 [\#225](https://github.com/microting/eform-service-installationchecking-plugin/issues/225)
+
 ## [v1.0.151](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.151) (2021-08-12)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.150...v1.0.151)
+
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 3.0.31 to 3.0.32 [\#217](https://github.com/microting/eform-service-installationchecking-plugin/issues/217)
+- Bump Microting.eFormApi.BasePn from 3.0.41 to 3.0.42 [\#216](https://github.com/microting/eform-service-installationchecking-plugin/issues/216)
+- Bump Microting.eForm from 5.2.31 to 5.2.32 [\#215](https://github.com/microting/eform-service-installationchecking-plugin/issues/215)
 
 ## [v1.0.150](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.150) (2021-08-11)
 
@@ -189,7 +236,6 @@
 
 - Bump Microting.InstallationCheckingBase from 3.0.8 to 3.0.11 [\#137](https://github.com/microting/eform-service-installationchecking-plugin/issues/137)
 - Bump Microting.eFormApi.BasePn from 3.0.9 to 3.0.12 [\#136](https://github.com/microting/eform-service-installationchecking-plugin/issues/136)
-- Bump Microting.eForm from 5.1.5 to 5.2.2 [\#135](https://github.com/microting/eform-service-installationchecking-plugin/issues/135)
 
 ## [v1.0.134](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.134) (2021-05-11)
 
@@ -207,6 +253,7 @@
 
 **Implemented enhancements:**
 
+- Bump Microting.eForm from 5.1.5 to 5.2.2 [\#135](https://github.com/microting/eform-service-installationchecking-plugin/issues/135)
 - Bump Microting.InstallationCheckingBase from 2.0.92 to 3.0.7 [\#126](https://github.com/microting/eform-service-installationchecking-plugin/issues/126)
 - Bump Microting.eFormApi.BasePn from 2.0.99 to 3.0.8 [\#125](https://github.com/microting/eform-service-installationchecking-plugin/issues/125)
 - Bump Microting.eForm from 4.4.3 to 5.1.4 [\#124](https://github.com/microting/eform-service-installationchecking-plugin/issues/124)
