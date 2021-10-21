@@ -1,8 +1,18 @@
 # Changelog
 
+## [v1.0.168](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.168) (2021-10-21)
+
+[Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.167...v1.0.168)
+
 ## [v1.0.167](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.167) (2021-10-14)
 
 [Full Changelog](https://github.com/microting/eform-service-installationchecking-plugin/compare/v1.0.166...v1.0.167)
+
+**Implemented enhancements:**
+
+- Bump Microting.InstallationCheckingBase from 3.0.50 to 3.0.51 [\#263](https://github.com/microting/eform-service-installationchecking-plugin/issues/263)
+- Bump Microting.eFormApi.BasePn from 3.0.60 to 3.0.61 [\#262](https://github.com/microting/eform-service-installationchecking-plugin/issues/262)
+- Bump Microting.eForm from 5.2.51 to 5.2.53 [\#261](https://github.com/microting/eform-service-installationchecking-plugin/issues/261)
 
 ## [v1.0.166](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.166) (2021-10-14)
 
@@ -255,6 +265,7 @@
 - Bump Microting.InstallationCheckingBase from 3.0.14 to 3.0.15 [\#148](https://github.com/microting/eform-service-installationchecking-plugin/issues/148)
 - Bump Microting.eFormApi.BasePn from 3.0.14 to 3.0.15 [\#147](https://github.com/microting/eform-service-installationchecking-plugin/issues/147)
 - Bump Microting.eForm from 5.2.4 to 5.2.5 [\#146](https://github.com/microting/eform-service-installationchecking-plugin/issues/146)
+- Bump Microting.eForm from 5.2.3 to 5.2.4 [\#143](https://github.com/microting/eform-service-installationchecking-plugin/issues/143)
 
 ## [v1.0.137](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.137) (2021-05-31)
 
@@ -262,9 +273,7 @@
 
 **Implemented enhancements:**
 
-- Bump Microting.InstallationCheckingBase from 3.0.12 to 3.0.14 [\#145](https://github.com/microting/eform-service-installationchecking-plugin/issues/145)
 - Bump Microting.eFormApi.BasePn from 3.0.13 to 3.0.14 [\#144](https://github.com/microting/eform-service-installationchecking-plugin/issues/144)
-- Bump Microting.eForm from 5.2.3 to 5.2.4 [\#143](https://github.com/microting/eform-service-installationchecking-plugin/issues/143)
 
 ## [v1.0.136](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.136) (2021-05-26)
 
@@ -272,6 +281,7 @@
 
 **Implemented enhancements:**
 
+- Bump Microting.InstallationCheckingBase from 3.0.12 to 3.0.14 [\#145](https://github.com/microting/eform-service-installationchecking-plugin/issues/145)
 - Bump Microting.InstallationCheckingBase from 3.0.11 to 3.0.12 [\#142](https://github.com/microting/eform-service-installationchecking-plugin/issues/142)
 - Bump Microting.eFormApi.BasePn from 3.0.12 to 3.0.13 [\#141](https://github.com/microting/eform-service-installationchecking-plugin/issues/141)
 - Bump Microting.eForm from 5.2.2 to 5.2.3 [\#140](https://github.com/microting/eform-service-installationchecking-plugin/issues/140)
@@ -295,7 +305,6 @@
 - Bump Microting.InstallationCheckingBase from 3.0.7 to 3.0.8 [\#130](https://github.com/microting/eform-service-installationchecking-plugin/issues/130)
 - Bump Microting.eFormApi.BasePn from 3.0.8 to 3.0.9 [\#129](https://github.com/microting/eform-service-installationchecking-plugin/issues/129)
 - Bump Microting.eForm from 5.1.4 to 5.1.5 [\#128](https://github.com/microting/eform-service-installationchecking-plugin/issues/128)
-- Bump Microting.eFormApi.BasePn from 2.0.97 to 2.0.99 [\#44](https://github.com/microting/eform-service-installationchecking-plugin/issues/44)
 
 ## [v1.0.133](https://github.com/microting/eform-service-installationchecking-plugin/tree/v1.0.133) (2021-05-07)
 
@@ -313,6 +322,7 @@
 
 **Implemented enhancements:**
 
+- Bump Microting.eFormApi.BasePn from 2.0.97 to 2.0.99 [\#44](https://github.com/microting/eform-service-installationchecking-plugin/issues/44)
 - Bump Microting.eForm from 4.4.1 to 4.4.3 [\#43](https://github.com/microting/eform-service-installationchecking-plugin/issues/43)
 
 **Merged pull requests:**
